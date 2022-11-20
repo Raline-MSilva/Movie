@@ -15,6 +15,7 @@
 		8B2D8DEC292925950089F86D /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2D8DEB292925950089F86D /* Movie.swift */; };
 		8B2D8DEF29292CFB0089F86D /* SetupViewCode+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2D8DEE29292CFB0089F86D /* SetupViewCode+Extension.swift */; };
 		8B2D8DFE292A6CCF0089F86D /* MovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2D8DFD292A6CCE0089F86D /* MovieTableViewCell.swift */; };
+		8B2D8E00292A71B70089F86D /* FormatterDate+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2D8DFF292A71B70089F86D /* FormatterDate+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		8B2D8DEB292925950089F86D /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		8B2D8DEE29292CFB0089F86D /* SetupViewCode+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SetupViewCode+Extension.swift"; sourceTree = "<group>"; };
 		8B2D8DFD292A6CCE0089F86D /* MovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
+		8B2D8DFF292A71B70089F86D /* FormatterDate+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FormatterDate+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				8B2D8DEE29292CFB0089F86D /* SetupViewCode+Extension.swift */,
+				8B2D8DFF292A71B70089F86D /* FormatterDate+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -200,6 +203,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B2D8DD729291AA00089F86D /* PageHomeViewController.swift in Sources */,
+				8B2D8E00292A71B70089F86D /* FormatterDate+Extension.swift in Sources */,
 				8B2D8DD329291AA00089F86D /* AppDelegate.swift in Sources */,
 				8B2D8DFE292A6CCF0089F86D /* MovieTableViewCell.swift in Sources */,
 				8B2D8DEC292925950089F86D /* Movie.swift in Sources */,
