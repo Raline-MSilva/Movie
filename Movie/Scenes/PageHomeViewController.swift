@@ -29,8 +29,11 @@ class PageHomeViewController: UIViewController, SetupViewCode {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .purple
         setup()
+    }
+    
+    func setupConfigure() {
+        view.backgroundColor = .purple
     }
 
     func setupSubviews() {

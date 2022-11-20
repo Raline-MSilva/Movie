@@ -61,6 +61,10 @@ class MovieTableViewCell: UITableViewCell, SetupViewCode {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func setupConfigure() {
+        backgroundColor = .clear
+    }
+    
     func configureCell(movie: Movie) {
         titleLabel.text = movie.title
         releaseDateLabel.text = "Lançamento: \(movie.releaseDate.formatterDate())"
