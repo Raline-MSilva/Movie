@@ -22,6 +22,7 @@ class PageHomeViewController: UIViewController, SetupViewCode {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.backgroundColor = .clear
         tableView.separatorStyle = .none
+        tableView.register(MovieTableViewCell.self, forCellReuseIdentifier: "movieCell")
         tableView.dataSource = self
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
@@ -60,10 +61,10 @@ extension PageHomeViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.textLabel?.text = movies[indexPath.row].title
-        cell.backgroundColor = .clear
-        cell.textLabel?.textColor = .white
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "movieCell", for: indexPath) as? MovieTableViewCell else {
+            fatalError("erro ao carregar a celula")
+        }
+        cell.configureCell(movie: movies[indexPath.row])
         return cell
     }
 }
