@@ -14,6 +14,7 @@
 		8B2D8DDF29291AA60089F86D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B2D8DDD29291AA60089F86D /* LaunchScreen.storyboard */; };
 		8B2D8DEC292925950089F86D /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2D8DEB292925950089F86D /* Movie.swift */; };
 		8B2D8DEF29292CFB0089F86D /* SetupViewCode+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2D8DEE29292CFB0089F86D /* SetupViewCode+Extension.swift */; };
+		8B2D8DFE292A6CCF0089F86D /* MovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2D8DFD292A6CCE0089F86D /* MovieTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		8B2D8DE029291AA60089F86D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B2D8DEB292925950089F86D /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		8B2D8DEE29292CFB0089F86D /* SetupViewCode+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SetupViewCode+Extension.swift"; sourceTree = "<group>"; };
+		8B2D8DFD292A6CCE0089F86D /* MovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 		8B2D8DE829291DF60089F86D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8B2D8DFC292A6C8E0089F86D /* Cell */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -116,6 +119,14 @@
 				8B2D8DEE29292CFB0089F86D /* SetupViewCode+Extension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		8B2D8DFC292A6C8E0089F86D /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				8B2D8DFD292A6CCE0089F86D /* MovieTableViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -190,6 +201,7 @@
 			files = (
 				8B2D8DD729291AA00089F86D /* PageHomeViewController.swift in Sources */,
 				8B2D8DD329291AA00089F86D /* AppDelegate.swift in Sources */,
+				8B2D8DFE292A6CCF0089F86D /* MovieTableViewCell.swift in Sources */,
 				8B2D8DEC292925950089F86D /* Movie.swift in Sources */,
 				8B2D8DEF29292CFB0089F86D /* SetupViewCode+Extension.swift in Sources */,
 				8B2D8DD529291AA00089F86D /* SceneDelegate.swift in Sources */,
