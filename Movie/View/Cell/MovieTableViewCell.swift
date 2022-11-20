@@ -63,6 +63,7 @@ class MovieTableViewCell: UITableViewCell, SetupViewCode {
     
     func configureCell(movie: Movie) {
         titleLabel.text = movie.title
+        releaseDateLabel.text = "Lançamento: \(movie.releaseDate.formatterDate())"
     }
     
     func setupSubviews() {
