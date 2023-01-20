@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class MovieTableViewCell: UITableViewCell, SetupViewCode {
     
@@ -61,6 +62,10 @@ class MovieTableViewCell: UITableViewCell, SetupViewCode {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+    }
+    
     func setupConfigure() {
         backgroundColor = .clear
     }
@@ -68,6 +73,8 @@ class MovieTableViewCell: UITableViewCell, SetupViewCode {
     func configureCell(movie: Movie) {
         titleLabel.text = movie.title
         releaseDateLabel.text = "Lançamento: \(movie.releaseDate.formatterDate())"
+        guard let posterURL = movie.image else { return }
+        moviePoster.configurePoster(posterURL)
     }
     
     func setupSubviews() {
