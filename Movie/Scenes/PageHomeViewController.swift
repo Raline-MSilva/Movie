@@ -8,6 +8,15 @@
 import UIKit
 
 class PageHomeViewController: UIViewController, SetupViewCode {
+    
+    private var requestNetwork = Network()
+    private var movies: [Movie] = [] {
+        didSet {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
 
     private lazy var titleView: UILabel = {
         let label = UILabel()
@@ -24,17 +33,26 @@ class PageHomeViewController: UIViewController, SetupViewCode {
         tableView.separatorStyle = .none
         tableView.register(MovieTableViewCell.self, forCellReuseIdentifier: "movieCell")
         tableView.dataSource = self
+        tableView.delegate = self
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.setBackground()
         setup()
+        getPopularMovies()
+    }
+    
+    func getPopularMovies() {
+        requestNetwork.fetchPopularMovies { movies in
+            self.movies = movies
+        }
     }
     
     func setupConfigure() {
-        view.backgroundColor = .purple
+        navigationItem.backButtonTitle = " Voltar "
     }
 
     func setupSubviews() {
@@ -44,7 +62,7 @@ class PageHomeViewController: UIViewController, SetupViewCode {
     
     func setupConstraints() {
         NSLayoutConstraint.activate([
-            titleView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 48),
+            titleView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24),
             titleView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             tableView.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: 24),
@@ -66,5 +84,13 @@ extension PageHomeViewController: UITableViewDataSource {
         }
         cell.configureCell(movie: movies[indexPath.row])
         return cell
+    }
+}
+
+extension PageHomeViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let controllerDetails = MovieDetailsViewController(movie: movies[indexPath.row])
+        navigationController?.pushViewController(controllerDetails, animated: true)
     }
 }
