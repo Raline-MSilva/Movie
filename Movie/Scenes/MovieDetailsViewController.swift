@@ -26,7 +26,7 @@ class MovieDetailsViewController: UIViewController, SetupViewCode {
     private lazy var userRating: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Classificação dos usuários: \(movie.voteAverage)"
+        label.text = "Avaliação dos Usuários: \(movie.voteAverage)"
         label.numberOfLines = 0
         label.textColor = .white
         label.font = .systemFont(ofSize: 16.0, weight: .bold)
