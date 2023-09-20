@@ -9,6 +9,7 @@ import UIKit
 import Kingfisher
 
 class MovieTableViewCell: UITableViewCell, SetupViewCode {
+    static let identifier = "MovieTableViewCell"
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()

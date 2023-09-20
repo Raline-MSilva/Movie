@@ -7,90 +7,43 @@
 
 import UIKit
 
-class PageHomeViewController: UIViewController, SetupViewCode {
+class PageHomeViewController: UIViewController {
     
-    private var requestNetwork = Network()
-    private var movies: [Movie] = [] {
-        didSet {
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
+    private var requestNetwork: Network
+    private var pageHomeView: PageHomeView?
+    private var movie: Movie?
+    
+    init(requestNetwork: Network) {
+        self.requestNetwork = requestNetwork
+        super.init(nibName: nil, bundle: nil)
     }
-
-    private lazy var titleView: UILabel = {
-        let label = UILabel()
-        label.text = "Filmes Populares"
-        label.font = .systemFont(ofSize: 28.0, weight: .bold)
-        label.textColor = .white
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
     
-    private lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .plain)
-        tableView.backgroundColor = .clear
-        tableView.separatorStyle = .none
-        tableView.register(MovieTableViewCell.self, forCellReuseIdentifier: "movieCell")
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        return tableView
-    }()
-
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func loadView() {
+        pageHomeView = PageHomeView()
+        pageHomeView?.delegate = self
+        view = pageHomeView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.setBackground()
-        setup()
         getPopularMovies()
+        navigationItem.backButtonTitle = " Voltar "
     }
     
     func getPopularMovies() {
         requestNetwork.fetchPopularMovies { movies in
-            self.movies = movies
+            self.pageHomeView?.movies = movies
         }
     }
-    
-    func setupConfigure() {
-        navigationItem.backButtonTitle = " Voltar "
-    }
-
-    func setupSubviews() {
-        view.addSubview(titleView)
-        view.addSubview(tableView)
-    }
-    
-    func setupConstraints() {
-        NSLayoutConstraint.activate([
-            titleView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24),
-            titleView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
-            tableView.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: 24),
-            tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
-    }
 }
-
-extension PageHomeViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return movies.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "movieCell", for: indexPath) as? MovieTableViewCell else {
-            fatalError("erro ao carregar a celula")
-        }
-        cell.configureCell(movie: movies[indexPath.row])
-        return cell
-    }
-}
-
-extension PageHomeViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        let controllerDetails = MovieDetailsViewController(movie: movies[indexPath.row])
-        navigationController?.pushViewController(controllerDetails, animated: true)
+extension PageHomeViewController: TableViewDelegate {
+    func didSelectCell(at indePath: IndexPath) {
+        guard let selectedMovie = pageHomeView?.movies[indePath.row] else { return }
+        let nextViewController = MovieDetailsViewController(movie: selectedMovie)
+        navigationController?.pushViewController(nextViewController, animated: false)
     }
 }
