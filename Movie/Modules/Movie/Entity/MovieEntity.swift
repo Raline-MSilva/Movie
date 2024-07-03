@@ -1,17 +1,17 @@
 //
-//  Movie.swift
+//  MovieEntity.swift
 //  Movie
 //
-//  Created by Raline Maria da Silva on 19/11/22.
+//  Created by Raline Maria da Silva on 01/07/24.
 //
 
 import UIKit
 
-struct MovieResults: Codable {
-    let results: [Movie]
+internal struct MovieEntityResults: Codable {
+    let results: [MovieEntity]
 }
 
-struct Movie: Codable {
+internal struct MovieEntity: Codable {
     let id: Int
     let title: String
     let overview: String
