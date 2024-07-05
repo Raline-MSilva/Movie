@@ -13,6 +13,7 @@ internal protocol HomeViewDelegate: AnyObject {
 
 class HomeView: UIView {
     weak var delegate: HomeViewDelegate?
+    private var menuStackView: UIStackView
     
     internal var popularMovies: [MovieEntity] = [] {
         didSet {
@@ -48,12 +49,36 @@ class HomeView: UIView {
     }()
     
     override init(frame: CGRect) {
+        self.menuStackView = UIStackView()
         super.init(frame: frame)
         setup()
+        setupMenuButtons()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupMenuButtons() {
+        let menuItems = ["Filmes", "Séries", "Pessoas", "Mais"]
+        
+        for item in menuItems {
+            let button = UIButton(type: .system)
+            button.setTitle(item, for: .normal)
+            button.setTitleColor(.white, for: .normal) // Ajuste a cor conforme necessário
+            button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+            button.backgroundColor = .darkGray
+            button.layer.cornerRadius = 8
+            button.clipsToBounds = true
+            button.addTarget(self, action: #selector(menuButtonTapped(_:)), for: .touchUpInside)
+            menuStackView.addArrangedSubview(button)
+        }
+    }
+
+    @objc private func menuButtonTapped(_ sender: UIButton) {
+        guard let title = sender.titleLabel?.text else { return }
+        print("\(title) button tapped")
+        // Adicionar lógica para tratar o click nos botões aqui
     }
     
     internal func createSectionLayout(sectionIndex: Int) -> NSCollectionLayoutSection {
@@ -62,7 +87,7 @@ class HomeView: UIView {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 5, bottom: 0, trailing: 5)
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalHeight(0.3))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.4), heightDimension: .fractionalHeight(0.3))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         group.interItemSpacing = .fixed(10)
         
@@ -84,6 +109,12 @@ extension HomeView: SetupViewCode {
     func setupConfigure() {
         backgroundColor = .clear
         
+        menuStackView.axis = .horizontal
+        menuStackView.distribution = .fillEqually
+        menuStackView.alignment = .center
+        menuStackView.spacing = 20
+        menuStackView.translatesAutoresizingMaskIntoConstraints = false
+        
         homeCollectionView.translatesAutoresizingMaskIntoConstraints = false
         homeCollectionView.delegate = self
         homeCollectionView.dataSource = self
@@ -94,12 +125,17 @@ extension HomeView: SetupViewCode {
     }
     
     func setupSubviews() {
+        addSubview(menuStackView)
         addSubview(homeCollectionView)
     }
     
     func setupConstraints() {
         NSLayoutConstraint.activate([
-            homeCollectionView.topAnchor.constraint(equalTo: self.topAnchor),
+            menuStackView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 10),
+            menuStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
+            menuStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
+            
+            homeCollectionView.topAnchor.constraint(equalTo: menuStackView.bottomAnchor, constant: 10),
             homeCollectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             homeCollectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             homeCollectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor)
