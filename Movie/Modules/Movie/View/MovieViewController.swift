@@ -11,7 +11,7 @@ internal class MovieViewController: UIViewController, MovieViewProtocol {
 
     internal var moviePresenter: MoviePresenterProtocol?
     private var movieView: MovieView?
-
+    
     internal override func loadView() {
         movieView = MovieView()
         movieView?.delegate = self
@@ -20,12 +20,20 @@ internal class MovieViewController: UIViewController, MovieViewProtocol {
 
     internal override func viewDidLoad() {
         super.viewDidLoad()
-        moviePresenter?.didLoadMovies()
-        view.backgroundColor = .lightGray
+        moviePresenter?.didLoadListMovies()
+        navigationItem.backButtonTitle = "Voltar"
     }
 
-    internal func showPopularMovies(_ movies: [MovieEntity]) {
-        movieView?.movies = movies
+    internal func showListPopularMovies(_ movies: [MovieEntity]) {
+        movieView?.popularMovies = movies
+    }
+    
+    internal func showNowPlayingMovies(_ movies: [MovieEntity]) {
+        movieView?.nowPlayingMovies = movies
+    }
+    
+    internal func showUpComingMovies(_ movies: [MovieEntity]) {
+        movieView?.upComingMovies = movies
     }
 
     internal func showError(_ error: Error) {
@@ -34,8 +42,7 @@ internal class MovieViewController: UIViewController, MovieViewProtocol {
 }
 
 extension MovieViewController: MovieViewDelegate {
-
-    internal func didSelectCell(at indexPath: IndexPath) {
-        moviePresenter?.didSelectCell(at: indexPath)
+    internal func didSelectCell(at indexPath: IndexPath, with movie: MovieEntity) {
+        moviePresenter?.didSelectCell(at: indexPath, with: movie)
     }
 }

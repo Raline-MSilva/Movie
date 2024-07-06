@@ -9,18 +9,42 @@ import Foundation
 
 internal class MovieInteractor: MovieInteractorInputProtocol {
     
-    internal weak var presenter: MovieInteractorOutputProtocol?
-    internal var apiClient: APIClientProtocol = APIClient()
-    internal var movies: [MovieEntity] = []
-
-    internal func fetchMovies() {
-        apiClient.fetchPopularMovies { result in
+    internal weak var interactorOutput: MovieInteractorOutputProtocol?
+    private let networkApiClient: APIClientProtocol = APIClient()
+    var movies: [MovieEntity] = []
+    
+    func fetchListPopularMovies() {
+        //aqui busca filmes
+        networkApiClient.fetchPopularMovies { result in
             switch result {
             case .success(let movies):
                 self.movies = movies
-                self.presenter?.didFetchMovies(movies)
+                //aqui me retorna eles
+                self.interactorOutput?.didFetchPopularMovies(movies)
             case .failure(let error):
-                self.presenter?.didFailWithError(error)
+                self.interactorOutput?.didFailWithError(error)
+            }
+        }
+    }
+    
+    func fetchNowPlayingMovies() {
+        networkApiClient.fetchNowPlayingMovies { result in
+            switch result {
+            case .success(let movies):
+                self.interactorOutput?.didFetchNowPlayingMovies(movies)
+            case .failure(let error):
+                self.interactorOutput?.didFailWithError(error)
+            }
+        }
+    }
+    
+    func fetchUpComingMovies() {
+        networkApiClient.fetchUpComingMovies { result in
+            switch result {
+            case .success(let movies):
+                self.interactorOutput?.didFetchUpComingMovies(movies)
+            case .failure(let error):
+                self.interactorOutput?.didFailWithError(error)
             }
         }
     }

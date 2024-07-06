@@ -7,33 +7,38 @@
 
 import UIKit
 
-internal protocol MovieViewProtocol: AnyObject {
+protocol MovieViewProtocol: AnyObject {
     var moviePresenter: MoviePresenterProtocol? { get set }
-    func showPopularMovies(_ movies: [MovieEntity])
+    func showListPopularMovies(_ movies: [MovieEntity])
+    func showNowPlayingMovies(_ movies: [MovieEntity])
+    func showUpComingMovies(_ movies: [MovieEntity])
     func showError(_ error: Error)
 }
 
-internal protocol MoviePresenterProtocol: AnyObject {
+protocol MoviePresenterProtocol: AnyObject {
     var movieView: MovieViewProtocol? { get set }
-    var interactor: MovieInteractorInputProtocol? { get set }
-    var router: MovieRouterProtocol? { get set }
-    func didLoadMovies()
-    func didSelectCell(at indexPath: IndexPath)
+    var interactorInput: MovieInteractorInputProtocol? { get set }
+    var movieRouter: MovieRouterProtocol? { get set }
+    func didLoadListMovies()
+    func didSelectCell(at indexPath: IndexPath, with movie: MovieEntity)
 }
 
-internal protocol MovieInteractorInputProtocol: AnyObject {
-    var presenter: MovieInteractorOutputProtocol? { get set }
-    var apiClient: APIClientProtocol { get set }
+protocol MovieInteractorInputProtocol: AnyObject {
+    var interactorOutput: MovieInteractorOutputProtocol? { get set }
     var movies: [MovieEntity] { get set }
-    func fetchMovies()
+    func fetchListPopularMovies()
+    func fetchNowPlayingMovies()
+    func fetchUpComingMovies()
 }
 
-internal protocol MovieInteractorOutputProtocol: AnyObject {
-    func didFetchMovies(_ movies: [MovieEntity])
+protocol MovieInteractorOutputProtocol: AnyObject {
+    func didFetchPopularMovies(_ movies: [MovieEntity])
+    func didFetchNowPlayingMovies(_ movies: [MovieEntity])
+    func didFetchUpComingMovies(_ movies: [MovieEntity])
     func didFailWithError(_ error: Error)
 }
 
-internal protocol MovieRouterProtocol: AnyObject {
+protocol MovieRouterProtocol: AnyObject {
     static func createMovieModule() -> UIViewController
-    func navigateToMovieDetails(from view: MovieViewProtocol, with movie: MovieEntity)
+    func navigateToListMovies(from view: MovieViewProtocol, with movie: MovieEntity)
 }

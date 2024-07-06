@@ -9,31 +9,41 @@ import Foundation
 
 class MoviePresenter: MoviePresenterProtocol {
     
-    internal weak var movieView: MovieViewProtocol?
-    internal var interactor: MovieInteractorInputProtocol?
-    internal var router: MovieRouterProtocol?
-
-    internal func didLoadMovies() {
-        interactor?.fetchMovies()
+    weak var movieView: MovieViewProtocol?
+    var interactorInput: MovieInteractorInputProtocol?
+    var movieRouter: MovieRouterProtocol?
+    
+    func didLoadListMovies() {
+        interactorInput?.fetchListPopularMovies()
+        interactorInput?.fetchNowPlayingMovies()
+        interactorInput?.fetchUpComingMovies()
     }
-
-    internal func didSelectCell(at indexPath: IndexPath) {
-        if let movies = interactor?.movies {
+    
+    func didSelectCell(at indexPath: IndexPath, with movie: MovieEntity) {
+        if let movies = interactorInput?.movies {
             let movie = movies[indexPath.row]
             
             guard let movieView = movieView else { return }
-            router?.navigateToMovieDetails(from: movieView, with: movie)
+            movieRouter?.navigateToListMovies(from: movieView, with: movie)
         }
     }
+
 }
 
 extension MoviePresenter: MovieInteractorOutputProtocol {
-    internal func didFetchMovies(_ movies: [MovieEntity]) {
-        movieView?.showPopularMovies(movies)
+    func didFetchUpComingMovies(_ movies: [MovieEntity]) {
+        movieView?.showUpComingMovies(movies)
     }
-
-    internal func didFailWithError(_ error: Error) {
+    
+    func didFetchPopularMovies(_ movies: [MovieEntity]) {
+        movieView?.showListPopularMovies(movies)
+    }
+    
+    func didFetchNowPlayingMovies(_ movies: [MovieEntity]) {
+        movieView?.showNowPlayingMovies(movies)
+    }
+    
+    func didFailWithError(_ error: Error) {
         movieView?.showError(error)
     }
-
 }

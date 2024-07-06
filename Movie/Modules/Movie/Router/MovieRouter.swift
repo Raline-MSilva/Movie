@@ -9,26 +9,27 @@ import UIKit
 
 internal class MovieRouter: MovieRouterProtocol {
 
-    internal static func createMovieModule() -> UIViewController {
-        let viewController = MovieViewController()
+    static func createMovieModule() -> UIViewController {
+        let movieViewController = MovieViewController()
         let presenter: MoviePresenterProtocol & MovieInteractorOutputProtocol = MoviePresenter()
         let interactor: MovieInteractorInputProtocol = MovieInteractor()
         let router: MovieRouterProtocol = MovieRouter()
-
-        viewController.moviePresenter = presenter
-        presenter.movieView = viewController
-        presenter.interactor = interactor
-        presenter.router = router
-        interactor.presenter = presenter
-
-        return viewController
+        
+        movieViewController.moviePresenter = presenter
+        presenter.movieView = movieViewController
+        presenter.interactorInput = interactor
+        presenter.movieRouter = router
+        interactor.interactorOutput = presenter
+        
+        return movieViewController
     }
     
-    internal func navigateToMovieDetails(from view: MovieViewProtocol, with movie: MovieEntity) {
+    func navigateToListMovies(from view: MovieViewProtocol, with movie: MovieEntity) {
         let movieDetailsVC = MovieDetailsViewController(movie: movie)
         if let viewController = view as? UIViewController {
             viewController.navigationController?.pushViewController(movieDetailsVC, animated: true)
         }
+        
     }
 
 }

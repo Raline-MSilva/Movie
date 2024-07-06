@@ -7,39 +7,44 @@
 
 import UIKit
 
-protocol MovieViewDelegate: AnyObject {
-    func didSelectCell(at indePath: IndexPath)
+internal protocol MovieViewDelegate: AnyObject {
+    func didSelectCell(at indexPath: IndexPath, with movie: MovieEntity)
 }
 
 class MovieView: UIView {
     weak var delegate: MovieViewDelegate?
-    internal var movies: [MovieEntity] = [] {
+    
+    internal var popularMovies: [MovieEntity] = [] {
         didSet {
             DispatchQueue.main.async {
-                self.tableView.reloadData()
+                self.movieCollectionView.reloadData()
+            }
+        }
+    }
+
+    internal var nowPlayingMovies: [MovieEntity] = [] {
+        didSet {
+            DispatchQueue.main.async {
+                self.movieCollectionView.reloadData()
+            }
+        }
+    }
+
+    internal var upComingMovies: [MovieEntity] = [] {
+        didSet {
+            DispatchQueue.main.async {
+                self.movieCollectionView.reloadData()
             }
         }
     }
     
-    private lazy var titleView: UILabel = {
-        let label = UILabel()
-        label.text = "Filmes Populares"
-        label.font = .systemFont(ofSize: 28.0, weight: .bold)
-        label.textColor = .white
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    private var sections: [String] = ["Populares", "Em cartaz", "Próximas Estreias"]
     
-    private lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .plain)
-        tableView.backgroundColor = .clear
-        tableView.separatorStyle = .none
-        tableView.register(MovieViewCell.self, forCellReuseIdentifier: MovieViewCell.identifier)
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.isScrollEnabled = true
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        return tableView
+    private lazy var movieCollectionView: UICollectionView = {
+        let layout = UICollectionViewCompositionalLayout { sectionIndex, environment -> NSCollectionLayoutSection? in
+            return NSCollectionLayoutSection.createSectionLayout(sectionIndex: sectionIndex)
+        }
+        return UICollectionView(frame: .zero, collectionViewLayout: layout)
     }()
     
     override init(frame: CGRect) {
@@ -50,6 +55,7 @@ class MovieView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
 }
 
 // MARK: SetupViewCode
@@ -58,47 +64,114 @@ extension MovieView: SetupViewCode {
     func setupConfigure() {
         backgroundColor = .clear
         
-    }
+        movieCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        movieCollectionView.delegate = self
+        movieCollectionView.dataSource = self
 
+        movieCollectionView.register(MovieViewCell.self, forCellWithReuseIdentifier: MovieViewCell.identifier)
+        movieCollectionView.register(SectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SectionHeaderView.identifier)
+
+    }
+    
     func setupSubviews() {
-        addSubview(titleView)
-        addSubview(tableView)
+        addSubview(movieCollectionView)
     }
     
     func setupConstraints() {
         NSLayoutConstraint.activate([
-            titleView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 24),
-            titleView.centerXAnchor.constraint(equalTo: centerXAnchor),
             
-            tableView.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: 24),
-            tableView.rightAnchor.constraint(equalTo: rightAnchor),
-            tableView.leftAnchor.constraint(equalTo: leftAnchor),
-            tableView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            movieCollectionView.topAnchor.constraint(equalTo: self.topAnchor),
+            movieCollectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            movieCollectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            movieCollectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor)
         ])
     }
 }
 
-// MARK: UITableViewDataSource
+ //MARK: UICollectionViewDataSource
 
-extension MovieView: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return movies.count
+extension MovieView: UICollectionViewDataSource {
+
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return sections.count
     }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: MovieViewCell.identifier, for: indexPath) as? MovieViewCell else {
-            fatalError("erro ao carregar a celula")
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+
+        switch section {
+        case 0:
+            return popularMovies.count
+        case 1:
+            return nowPlayingMovies.count
+        case 2:
+            return upComingMovies.count
+        default:
+            return 0
         }
-        cell.configureCell(movie: movies[indexPath.row])
+
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieViewCell.identifier, for: indexPath) as? MovieViewCell else {
+            fatalError("Could not dequeue cell")
+        }
+
+        let section = indexPath.section
+        let index = indexPath.item
+
+        switch section {
+        case 0:
+            cell.configure(with: popularMovies[index])
+
+        case 1:
+
+            cell.configure(with: nowPlayingMovies[index])
+
+        case 2:
+
+            cell.configure(with: upComingMovies[index])
+
+        default:
+            break
+        }
         return cell
     }
 }
 
-// MARK: UITableViewDelegate
+// MARK: UICollectionViewDelegate
 
-extension MovieView: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: false)
-        delegate?.didSelectCell(at: indexPath)
+extension MovieView: UICollectionViewDelegate {
+
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+
+        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SectionHeaderView.identifier, for: indexPath) as? SectionHeaderView else {
+            fatalError("Could not dequeue header")
+        }
+
+        header.titleLabel.text = sections[indexPath.section]
+        return header
     }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+
+        let section = indexPath.section
+        let index = indexPath.item
+        var selectedMovie: MovieEntity?
+
+        switch section {
+        case 0:
+            selectedMovie = popularMovies[index]
+        case 1:
+            selectedMovie = nowPlayingMovies[index]
+        case 2:
+            selectedMovie = upComingMovies[index]
+        default:
+            break
+        }
+        guard let movie = selectedMovie else {
+            return
+        }
+        delegate?.didSelectCell(at: indexPath, with: movie)
+    }
+
 }
