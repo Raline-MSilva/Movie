@@ -10,10 +10,10 @@ import Kingfisher
 
 class MovieDetailsViewController: UIViewController {
     
-    private var movie: Movie
+    internal var movie: MovieEntity
     private var movieDetail: MovieDetailsView?
     
-    init(movie: Movie) {
+    init(movie: MovieEntity) {
         self.movie = movie
         super.init(nibName: nil, bundle: nil)
     }

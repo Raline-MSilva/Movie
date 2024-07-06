@@ -8,45 +8,12 @@
 import UIKit
 
 internal protocol HomeViewDelegate: AnyObject {
-    func didSelectCell(at indexPath: IndexPath, with movie: MovieEntity)
+    func didTapMenuButton(_ menuItem: String)
 }
 
 class HomeView: UIView {
     weak var delegate: HomeViewDelegate?
     private var menuStackView: UIStackView
-    
-    internal var popularMovies: [MovieEntity] = [] {
-        didSet {
-            DispatchQueue.main.async {
-                self.homeCollectionView.reloadData()
-            }
-        }
-    }
-    
-    internal var nowPlayingMovies: [MovieEntity] = [] {
-        didSet {
-            DispatchQueue.main.async {
-                self.homeCollectionView.reloadData()
-            }
-        }
-    }
-    
-    internal var upComingMovies: [MovieEntity] = [] {
-        didSet {
-            DispatchQueue.main.async {
-                self.homeCollectionView.reloadData()
-            }
-        }
-    }
-    
-    private var sections: [String] = ["Populares", "Em cartaz", "Próximas Estreias"]
-    
-    private lazy var homeCollectionView: UICollectionView = {
-        let layout = UICollectionViewCompositionalLayout { sectionIndex, environment -> NSCollectionLayoutSection? in
-            return self.createSectionLayout(sectionIndex: sectionIndex)
-        }
-        return UICollectionView(frame: .zero, collectionViewLayout: layout)
-    }()
     
     override init(frame: CGRect) {
         self.menuStackView = UIStackView()
@@ -65,7 +32,7 @@ class HomeView: UIView {
         for item in menuItems {
             let button = UIButton(type: .system)
             button.setTitle(item, for: .normal)
-            button.setTitleColor(.white, for: .normal) // Ajuste a cor conforme necessário
+            button.setTitleColor(.white, for: .normal)
             button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
             button.backgroundColor = .darkGray
             button.layer.cornerRadius = 8
@@ -77,30 +44,9 @@ class HomeView: UIView {
 
     @objc private func menuButtonTapped(_ sender: UIButton) {
         guard let title = sender.titleLabel?.text else { return }
-        print("\(title) button tapped")
-        // Adicionar lógica para tratar o click nos botões aqui
+        delegate?.didTapMenuButton(title)
     }
-    
-    internal func createSectionLayout(sectionIndex: Int) -> NSCollectionLayoutSection {
-        
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 5, bottom: 0, trailing: 5)
-        
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.4), heightDimension: .fractionalHeight(0.3))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-        group.interItemSpacing = .fixed(10)
-        
-        let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .continuous
-        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
-        
-        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44))
-        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
-        section.boundarySupplementaryItems = [sectionHeader]
-        
-        return section
-    }
+
 }
 
 // MARK: SetupViewCode
@@ -114,19 +60,12 @@ extension HomeView: SetupViewCode {
         menuStackView.alignment = .center
         menuStackView.spacing = 20
         menuStackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        homeCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        homeCollectionView.delegate = self
-        homeCollectionView.dataSource = self
-        
-        homeCollectionView.register(HomeCollectionViewCell.self, forCellWithReuseIdentifier: HomeCollectionViewCell.identifier)
-        homeCollectionView.register(SectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SectionHeaderView.identifier)
-        
+
     }
     
     func setupSubviews() {
         addSubview(menuStackView)
-        addSubview(homeCollectionView)
+
     }
     
     func setupConstraints() {
@@ -134,100 +73,7 @@ extension HomeView: SetupViewCode {
             menuStackView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 10),
             menuStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
             menuStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
-            
-            homeCollectionView.topAnchor.constraint(equalTo: menuStackView.bottomAnchor, constant: 10),
-            homeCollectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            homeCollectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            homeCollectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor)
+
         ])
     }
-}
-
-// MARK: UICollectionViewDataSource
-
-extension HomeView: UICollectionViewDataSource {
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return sections.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        switch section {
-        case 0:
-            return popularMovies.count
-        case 1:
-            return nowPlayingMovies.count
-        case 2:
-            return upComingMovies.count
-        default:
-            return 0
-        }
-        
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeCollectionViewCell.identifier, for: indexPath) as? HomeCollectionViewCell else {
-            fatalError("Could not dequeue cell")
-        }
-        
-        let section = indexPath.section
-        let index = indexPath.item
-        
-        switch section {
-        case 0:
-            cell.configure(with: popularMovies[index])
-
-        case 1:
-            
-            cell.configure(with: nowPlayingMovies[index])
-            
-        case 2:
-            
-            cell.configure(with: upComingMovies[index])
-            
-        default:
-            break
-        }
-        return cell
-    }
-}
-
-// MARK: UICollectionViewDelegate
-
-extension HomeView: UICollectionViewDelegate {
-    
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        
-        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SectionHeaderView.identifier, for: indexPath) as? SectionHeaderView else {
-            fatalError("Could not dequeue header")
-        }
-        
-        header.titleLabel.text = sections[indexPath.section]
-        return header
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        let section = indexPath.section
-        let index = indexPath.item
-        var selectedMovie: MovieEntity?
-        
-        switch section {
-        case 0:
-            selectedMovie = popularMovies[index]
-        case 1:
-            selectedMovie = nowPlayingMovies[index]
-        case 2:
-            selectedMovie = upComingMovies[index]
-        default:
-            break
-        }
-        guard let movie = selectedMovie else {
-            return
-        }
-        
-        delegate?.didSelectCell(at: indexPath, with: movie)
-    }
-
 }

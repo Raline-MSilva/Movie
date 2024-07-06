@@ -15,8 +15,8 @@ class HomeRouter: HomeRouterProtocol {
         let interactor: HomeInteractorInputProtocol = HomeInteractor()
         let router: HomeRouterProtocol = HomeRouter()
         
-        homeViewController.homePresenter = presenter
-        presenter.homeView = homeViewController
+        //homeViewController.homePresenter = presenter
+        //presenter.homeView = homeViewController
         presenter.homeInteractor = interactor
         presenter.homeRouter = router
         interactor.homePresenterInteractor = presenter
