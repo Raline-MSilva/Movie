@@ -9,7 +9,7 @@ import UIKit
 
 final class MovieDetailsView: UIView {
     
-    private let movie: Movie
+    internal var movie: MovieEntity
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -49,7 +49,7 @@ final class MovieDetailsView: UIView {
         return imgView
     }()
     
-    init(movie: Movie) {
+    init(movie: MovieEntity) {
         self.movie = movie
         super.init(frame: .zero)
         setup()
@@ -65,7 +65,6 @@ final class MovieDetailsView: UIView {
 extension MovieDetailsView: SetupViewCode {
     func setupConfigure() {
         setBackground()
-        
     }
     
     func setupSubviews() {
