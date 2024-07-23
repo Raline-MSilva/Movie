@@ -12,6 +12,11 @@ protocol APIClientProtocol: AnyObject {
     func fetchNowPlayingMovies(completion: @escaping (Result<[MovieEntity], Error>) -> Void)
     func fetchUpComingMovies(completion: @escaping (Result<[MovieEntity], Error>) -> Void)
     func fetchMovies(from endpoint: String, completion: @escaping (Result<[MovieEntity], Error>) -> Void)
+    
+    func fetchPopularTalkShows(completion: @escaping (Result<[TalkShowEntity], Error>) -> Void)
+    func fetchTalkShow(from endpoint: String, completion: @escaping (Result<[TalkShowEntity], Error>) -> Void)
+    func fetchAiringTodayTalkShows(completion: @escaping (Result<[TalkShowEntity], Error>) -> Void)
+    func fetchOnTheAirTalkShows(completion: @escaping (Result<[TalkShowEntity], Error>) -> Void)
 }
 
 class APIClient: APIClientProtocol {
@@ -46,6 +51,21 @@ class APIClient: APIClientProtocol {
         fetchMovies(from: "movie/upcoming", completion: completion)
     }
     
+    // Fetch popular talk shows
+    func fetchPopularTalkShows(completion: @escaping (Result<[TalkShowEntity], Error>) -> Void) {
+        fetchTalkShow(from: "tv/popular", completion: completion)
+    }
+    
+    // Fetch airing today talk shows
+    func fetchAiringTodayTalkShows(completion: @escaping (Result<[TalkShowEntity], Error>) -> Void) {
+        fetchTalkShow(from: "tv/airing_today", completion: completion)
+    }
+    
+    // Fetch on the air talk shows
+    func fetchOnTheAirTalkShows(completion: @escaping (Result<[TalkShowEntity], Error>) -> Void) {
+        fetchTalkShow(from: "tv/on_the_air", completion: completion)
+    }
+
     internal func fetchMovies(from endpoint: String, completion: @escaping (Result<[MovieEntity], Error>) -> Void) {
         guard let urlString = getURL(for: endpoint),
               let url = URL(string: urlString) else {
@@ -66,6 +86,34 @@ class APIClient: APIClientProtocol {
             
             do {
                 let result = try JSONDecoder().decode(MovieEntityResults.self, from: data)
+                completion(.success(result.results))
+            } catch {
+                completion(.failure(error))
+            }
+        }
+        task.resume()
+    }
+    
+    internal func fetchTalkShow(from endpoint: String, completion: @escaping (Result<[TalkShowEntity], Error>) -> Void) {
+        guard let urlString = getURL(for: endpoint),
+              let url = URL(string: urlString) else {
+            completion(.failure(NetworkError.invalidURL))
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            guard let data = data else {
+                completion(.failure(NetworkError.noData))
+                return
+            }
+            
+            do {
+                let result = try JSONDecoder().decode(TalkShowEntityResults.self, from: data)
                 completion(.success(result.results))
             } catch {
                 completion(.failure(error))

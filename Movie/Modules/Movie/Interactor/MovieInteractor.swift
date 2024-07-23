@@ -31,6 +31,7 @@ internal class MovieInteractor: MovieInteractorInputProtocol {
         networkApiClient.fetchNowPlayingMovies { result in
             switch result {
             case .success(let movies):
+                self.movies = movies
                 self.interactorOutput?.didFetchNowPlayingMovies(movies)
             case .failure(let error):
                 self.interactorOutput?.didFailWithError(error)

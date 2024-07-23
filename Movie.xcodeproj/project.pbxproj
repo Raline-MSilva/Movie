@@ -39,6 +39,15 @@
 		8C4B7C722C359648007257F7 /* HomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4B7C712C359648007257F7 /* HomeInteractor.swift */; };
 		8C4B7C742C359732007257F7 /* HomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4B7C732C359732007257F7 /* HomeRouter.swift */; };
 		8C4B7C762C38D491007257F7 /* NSCollectionLayoutSection+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4B7C752C38D491007257F7 /* NSCollectionLayoutSection+Extension.swift */; };
+		8C4B7C7C2C3CB98D007257F7 /* TalkShowEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4B7C7B2C3CB98D007257F7 /* TalkShowEntity.swift */; };
+		8C4B7C7F2C3CBBA3007257F7 /* TalkShowProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4B7C7E2C3CBBA3007257F7 /* TalkShowProtocols.swift */; };
+		8C4B7C822C3CBF12007257F7 /* TalkShowInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4B7C812C3CBF12007257F7 /* TalkShowInteractor.swift */; };
+		8C4B7C852C3CC085007257F7 /* TalkShowPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4B7C842C3CC085007257F7 /* TalkShowPresenter.swift */; };
+		8C4B7C882C3CC192007257F7 /* TalkShowRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4B7C872C3CC192007257F7 /* TalkShowRouter.swift */; };
+		8C4B7C8B2C3CCD80007257F7 /* TalkShowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4B7C8A2C3CCD80007257F7 /* TalkShowView.swift */; };
+		8C4B7C8D2C3CCF23007257F7 /* TalkShowCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4B7C8C2C3CCF23007257F7 /* TalkShowCollectionViewCell.swift */; };
+		8C4B7C8F2C3CCFB4007257F7 /* TalkShowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4B7C8E2C3CCFB4007257F7 /* TalkShowViewController.swift */; };
+		8C4B7C932C3F2C48007257F7 /* TalkShowDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4B7C922C3F2C48007257F7 /* TalkShowDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +85,15 @@
 		8C4B7C712C359648007257F7 /* HomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInteractor.swift; sourceTree = "<group>"; };
 		8C4B7C732C359732007257F7 /* HomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRouter.swift; sourceTree = "<group>"; };
 		8C4B7C752C38D491007257F7 /* NSCollectionLayoutSection+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSCollectionLayoutSection+Extension.swift"; sourceTree = "<group>"; };
+		8C4B7C7B2C3CB98D007257F7 /* TalkShowEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkShowEntity.swift; sourceTree = "<group>"; };
+		8C4B7C7E2C3CBBA3007257F7 /* TalkShowProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkShowProtocols.swift; sourceTree = "<group>"; };
+		8C4B7C812C3CBF12007257F7 /* TalkShowInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkShowInteractor.swift; sourceTree = "<group>"; };
+		8C4B7C842C3CC085007257F7 /* TalkShowPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkShowPresenter.swift; sourceTree = "<group>"; };
+		8C4B7C872C3CC192007257F7 /* TalkShowRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkShowRouter.swift; sourceTree = "<group>"; };
+		8C4B7C8A2C3CCD80007257F7 /* TalkShowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkShowView.swift; sourceTree = "<group>"; };
+		8C4B7C8C2C3CCF23007257F7 /* TalkShowCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkShowCollectionViewCell.swift; sourceTree = "<group>"; };
+		8C4B7C8E2C3CCFB4007257F7 /* TalkShowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkShowViewController.swift; sourceTree = "<group>"; };
+		8C4B7C922C3F2C48007257F7 /* TalkShowDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkShowDetailView.swift; sourceTree = "<group>"; };
 		CA784E44F5951DFB2C6A54E4 /* Pods-Movie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movie.debug.xcconfig"; path = "Target Support Files/Pods-Movie/Pods-Movie.debug.xcconfig"; sourceTree = "<group>"; };
 		F3A5BC78655C27061549EAE3 /* Pods-Movie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movie.release.xcconfig"; path = "Target Support Files/Pods-Movie/Pods-Movie.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -159,6 +177,7 @@
 		8C4B7C412C339A1B007257F7 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				8C4B7C792C3CB96C007257F7 /* TalkShow */,
 				8C4B7C5D2C34E1A2007257F7 /* Home */,
 				8C4B7C422C339B46007257F7 /* Movie */,
 				8C4B7C772C38DA69007257F7 /* MovieDetail */,
@@ -309,6 +328,86 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		8C4B7C792C3CB96C007257F7 /* TalkShow */ = {
+			isa = PBXGroup;
+			children = (
+				8C4B7C902C3F2BF2007257F7 /* TalkShowDetail */,
+				8C4B7C892C3CCD6A007257F7 /* View */,
+				8C4B7C862C3CC17E007257F7 /* Router */,
+				8C4B7C832C3CC06E007257F7 /* Presenter */,
+				8C4B7C802C3CBEF9007257F7 /* Interactor */,
+				8C4B7C7D2C3CBB89007257F7 /* Protocols */,
+				8C4B7C7A2C3CB976007257F7 /* Entity */,
+			);
+			path = TalkShow;
+			sourceTree = "<group>";
+		};
+		8C4B7C7A2C3CB976007257F7 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				8C4B7C7B2C3CB98D007257F7 /* TalkShowEntity.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		8C4B7C7D2C3CBB89007257F7 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				8C4B7C7E2C3CBBA3007257F7 /* TalkShowProtocols.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		8C4B7C802C3CBEF9007257F7 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				8C4B7C812C3CBF12007257F7 /* TalkShowInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		8C4B7C832C3CC06E007257F7 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				8C4B7C842C3CC085007257F7 /* TalkShowPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		8C4B7C862C3CC17E007257F7 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				8C4B7C872C3CC192007257F7 /* TalkShowRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		8C4B7C892C3CCD6A007257F7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8C4B7C8A2C3CCD80007257F7 /* TalkShowView.swift */,
+				8C4B7C8C2C3CCF23007257F7 /* TalkShowCollectionViewCell.swift */,
+				8C4B7C8E2C3CCFB4007257F7 /* TalkShowViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8C4B7C902C3F2BF2007257F7 /* TalkShowDetail */ = {
+			isa = PBXGroup;
+			children = (
+				8C4B7C912C3F2C05007257F7 /* View */,
+			);
+			path = TalkShowDetail;
+			sourceTree = "<group>";
+		};
+		8C4B7C912C3F2C05007257F7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8C4B7C922C3F2C48007257F7 /* TalkShowDetailView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		CF52DBB46C9DAE5AE21BDA6E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -442,6 +541,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C4B7C6A2C34E85D007257F7 /* HomeViewController.swift in Sources */,
+				8C4B7C7C2C3CB98D007257F7 /* TalkShowEntity.swift in Sources */,
 				8B08A8C829771DAA00287FDB /* UIImagemView + Extension.swift in Sources */,
 				8C4B7C4B2C339E0C007257F7 /* APIClient.swift in Sources */,
 				8C4B7C6E2C359307007257F7 /* SectionHeaderView.swift in Sources */,
@@ -449,26 +549,34 @@
 				8C4B7C6C2C35913D007257F7 /* HomeCollectionViewCell.swift in Sources */,
 				8C4B7C702C3593D0007257F7 /* HomePresenter.swift in Sources */,
 				8C4B7C532C33A539007257F7 /* MovieRouter.swift in Sources */,
+				8C4B7C882C3CC192007257F7 /* TalkShowRouter.swift in Sources */,
 				8C4B7C552C33A66D007257F7 /* MovieView.swift in Sources */,
 				8C4B7C722C359648007257F7 /* HomeInteractor.swift in Sources */,
 				8B2D8E00292A71B70089F86D /* FormatterDate+Extension.swift in Sources */,
 				8BB7F7A2297B55BB0076D6ED /* UIColor+Extension.swift in Sources */,
 				8C4B7C572C33A6F6007257F7 /* MovieViewController.swift in Sources */,
 				8BF445EE293399F7009694CC /* MovieDetailsViewController.swift in Sources */,
+				8C4B7C7F2C3CBBA3007257F7 /* TalkShowProtocols.swift in Sources */,
 				8C4B7C5A2C33AB3F007257F7 /* MovieProtocols.swift in Sources */,
 				8C4B7C512C33A3E8007257F7 /* MoviePresenter.swift in Sources */,
 				8B2D8DD329291AA00089F86D /* AppDelegate.swift in Sources */,
+				8C4B7C8D2C3CCF23007257F7 /* TalkShowCollectionViewCell.swift in Sources */,
 				8BB7F7A6297B5BDA0076D6ED /* NSAttributedString+Extension.swift in Sources */,
 				8C4B7C742C359732007257F7 /* HomeRouter.swift in Sources */,
 				8BB7F7A4297B56BB0076D6ED /* UIView+Extension.swift in Sources */,
 				8C4B7C672C34E61E007257F7 /* Protocols.swift in Sources */,
+				8C4B7C852C3CC085007257F7 /* TalkShowPresenter.swift in Sources */,
+				8C4B7C932C3F2C48007257F7 /* TalkShowDetailView.swift in Sources */,
 				8C4B7C492C339C48007257F7 /* MovieEntity.swift in Sources */,
 				8C4B7C5C2C33B27B007257F7 /* MovieViewCell.swift in Sources */,
 				8B9132E72A647321003EC3B0 /* MovieDetailsView.swift in Sources */,
 				8C4B7C762C38D491007257F7 /* NSCollectionLayoutSection+Extension.swift in Sources */,
+				8C4B7C822C3CBF12007257F7 /* TalkShowInteractor.swift in Sources */,
 				8B2D8DEF29292CFB0089F86D /* SetupViewCode+Extension.swift in Sources */,
+				8C4B7C8B2C3CCD80007257F7 /* TalkShowView.swift in Sources */,
 				8C4B7C652C34E2C6007257F7 /* HomeView.swift in Sources */,
 				8B2D8DD529291AA00089F86D /* SceneDelegate.swift in Sources */,
+				8C4B7C8F2C3CCFB4007257F7 /* TalkShowViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

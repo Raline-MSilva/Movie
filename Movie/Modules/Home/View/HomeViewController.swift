@@ -33,8 +33,8 @@ extension HomeViewController: HomeViewDelegate {
         switch menuItem {
         case "Filmes":
             viewController = MovieRouter.createMovieModule()
-//        case "Séries":
-//            viewController = SeriesRouter.createModule()
+        case "Séries":
+            viewController = TalkShowRouter.createTalkShowModule()
 //        case "Pessoas":
 //            viewController = PeopleRouter.createModule()
         default:
