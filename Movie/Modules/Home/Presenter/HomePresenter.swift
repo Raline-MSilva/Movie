@@ -12,39 +12,34 @@ class HomePresenter: HomePresenterProtocol {
     weak var homeView: HomeViewProtocol?
     var homeInteractor: HomeInteractorInputProtocol?
     var homeRouter: HomeRouterProtocol?
+    var apiClient: APIClientProtocol?
     
-    func didLoadListMovies() {
-        homeInteractor?.fetchListPopularMovies()
-        homeInteractor?.fetchNowPlayingMovies()
-        homeInteractor?.fetchUpComingMovies()
+//    init(homeView: HomeViewProtocol, apiClient: APIClientProtocol) {
+//        self.homeView = homeView
+//        self.apiClient = apiClient
+//    }
+    
+    func loadNowPlayingTrailers() {
+        homeInteractor?.fetchNowPlayingTrailers()
     }
     
-    func didSelectCell(at indexPath: IndexPath, with movie: MovieEntity) {
-        if let movies = homeInteractor?.movies {
-            let movie = movies[indexPath.row]
-            
-            guard let movieView = homeView else { return }
-            homeRouter?.navigateToMovies(from: movieView, with: movie)
-        }
+    func loadUpcomingTrailers() {
+        homeInteractor?.fetchUpcomingTrailers()
     }
-
+    
 }
 
 extension HomePresenter: HomeInteractorOutputProtocol {
-    func didFetchUpComingMovies(_ movies: [MovieEntity]) {
-        homeView?.showUpComingMovies(movies)
+    func didFetchNowPlayingTrailers(_ trailers: [Trailer]) {
+        homeView?.showNowPlayingTrailers(trailers)
     }
     
-    func didFetchPopularMovies(_ movies: [MovieEntity]) {
-        homeView?.showListPopularMovies(movies)
+    func didFetchUpcomingTrailers(_ trailers: [Trailer]) {
+        homeView?.showUpcomingTrailers(trailers)
     }
     
-    func didFetchNowPlayingMovies(_ movies: [MovieEntity]) {
-        homeView?.showNowPlayingMovies(movies)
+    func didFailToFetchTrailers(with error: Error) {
+        homeView?.showError(error.localizedDescription as! Error)
     }
-    
-    func didFailWithError(_ error: Error) {
-        homeView?.showError(error)
-    }
-    
+
 }

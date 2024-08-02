@@ -18,6 +18,7 @@ internal struct MovieEntity: Codable {
     let releaseDate: String
     let image: String?
     let voteAverage: Double
+    let video: Bool
     
     private enum CodingKeys: String, CodingKey {
         case id
@@ -26,5 +27,6 @@ internal struct MovieEntity: Codable {
         case releaseDate = "release_date"
         case image = "poster_path"
         case voteAverage = "vote_average"
+        case video
     }
 }

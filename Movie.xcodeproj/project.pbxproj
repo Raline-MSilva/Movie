@@ -48,6 +48,12 @@
 		8C4B7C8D2C3CCF23007257F7 /* TalkShowCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4B7C8C2C3CCF23007257F7 /* TalkShowCollectionViewCell.swift */; };
 		8C4B7C8F2C3CCFB4007257F7 /* TalkShowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4B7C8E2C3CCFB4007257F7 /* TalkShowViewController.swift */; };
 		8C4B7C932C3F2C48007257F7 /* TalkShowDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4B7C922C3F2C48007257F7 /* TalkShowDetailView.swift */; };
+		8C4B7C972C4F3B75007257F7 /* Trailer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4B7C962C4F3B75007257F7 /* Trailer.swift */; };
+		8C4B7C9B2C4F3BDE007257F7 /* TrailersProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4B7C9A2C4F3BDE007257F7 /* TrailersProtocols.swift */; };
+		8C4B7C9E2C4F3C01007257F7 /* TrailerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4B7C9D2C4F3C01007257F7 /* TrailerInteractor.swift */; };
+		8C4B7CA12C4F3C8E007257F7 /* TrailerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4B7CA02C4F3C8E007257F7 /* TrailerPresenter.swift */; };
+		8C4B7CA42C4F3DF0007257F7 /* TrailerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4B7CA32C4F3DF0007257F7 /* TrailerRouter.swift */; };
+		8C4B7CA72C4F42C0007257F7 /* TrailerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4B7CA62C4F42C0007257F7 /* TrailerCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -94,6 +100,12 @@
 		8C4B7C8C2C3CCF23007257F7 /* TalkShowCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkShowCollectionViewCell.swift; sourceTree = "<group>"; };
 		8C4B7C8E2C3CCFB4007257F7 /* TalkShowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkShowViewController.swift; sourceTree = "<group>"; };
 		8C4B7C922C3F2C48007257F7 /* TalkShowDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkShowDetailView.swift; sourceTree = "<group>"; };
+		8C4B7C962C4F3B75007257F7 /* Trailer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trailer.swift; sourceTree = "<group>"; };
+		8C4B7C9A2C4F3BDE007257F7 /* TrailersProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailersProtocols.swift; sourceTree = "<group>"; };
+		8C4B7C9D2C4F3C01007257F7 /* TrailerInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailerInteractor.swift; sourceTree = "<group>"; };
+		8C4B7CA02C4F3C8E007257F7 /* TrailerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailerPresenter.swift; sourceTree = "<group>"; };
+		8C4B7CA32C4F3DF0007257F7 /* TrailerRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailerRouter.swift; sourceTree = "<group>"; };
+		8C4B7CA62C4F42C0007257F7 /* TrailerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailerCollectionViewCell.swift; sourceTree = "<group>"; };
 		CA784E44F5951DFB2C6A54E4 /* Pods-Movie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movie.debug.xcconfig"; path = "Target Support Files/Pods-Movie/Pods-Movie.debug.xcconfig"; sourceTree = "<group>"; };
 		F3A5BC78655C27061549EAE3 /* Pods-Movie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movie.release.xcconfig"; path = "Target Support Files/Pods-Movie/Pods-Movie.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -177,6 +189,7 @@
 		8C4B7C412C339A1B007257F7 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				8C4B7C942C4F3B5F007257F7 /* Trailers */,
 				8C4B7C792C3CB96C007257F7 /* TalkShow */,
 				8C4B7C5D2C34E1A2007257F7 /* Home */,
 				8C4B7C422C339B46007257F7 /* Movie */,
@@ -408,6 +421,67 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		8C4B7C942C4F3B5F007257F7 /* Trailers */ = {
+			isa = PBXGroup;
+			children = (
+				8C4B7CA52C4F429A007257F7 /* View */,
+				8C4B7CA22C4F3DD5007257F7 /* Router */,
+				8C4B7C9F2C4F3C7A007257F7 /* Presenter */,
+				8C4B7C9C2C4F3BEE007257F7 /* Interactor */,
+				8C4B7C982C4F3B9F007257F7 /* Protocols */,
+				8C4B7C952C4F3B69007257F7 /* Entity */,
+			);
+			path = Trailers;
+			sourceTree = "<group>";
+		};
+		8C4B7C952C4F3B69007257F7 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				8C4B7C962C4F3B75007257F7 /* Trailer.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		8C4B7C982C4F3B9F007257F7 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				8C4B7C9A2C4F3BDE007257F7 /* TrailersProtocols.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		8C4B7C9C2C4F3BEE007257F7 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				8C4B7C9D2C4F3C01007257F7 /* TrailerInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		8C4B7C9F2C4F3C7A007257F7 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				8C4B7CA02C4F3C8E007257F7 /* TrailerPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		8C4B7CA22C4F3DD5007257F7 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				8C4B7CA32C4F3DF0007257F7 /* TrailerRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		8C4B7CA52C4F429A007257F7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8C4B7CA62C4F42C0007257F7 /* TrailerCollectionViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		CF52DBB46C9DAE5AE21BDA6E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -542,11 +616,13 @@
 			files = (
 				8C4B7C6A2C34E85D007257F7 /* HomeViewController.swift in Sources */,
 				8C4B7C7C2C3CB98D007257F7 /* TalkShowEntity.swift in Sources */,
+				8C4B7CA12C4F3C8E007257F7 /* TrailerPresenter.swift in Sources */,
 				8B08A8C829771DAA00287FDB /* UIImagemView + Extension.swift in Sources */,
 				8C4B7C4B2C339E0C007257F7 /* APIClient.swift in Sources */,
 				8C4B7C6E2C359307007257F7 /* SectionHeaderView.swift in Sources */,
 				8C4B7C4F2C339F8C007257F7 /* MovieInteractor.swift in Sources */,
 				8C4B7C6C2C35913D007257F7 /* HomeCollectionViewCell.swift in Sources */,
+				8C4B7CA72C4F42C0007257F7 /* TrailerCollectionViewCell.swift in Sources */,
 				8C4B7C702C3593D0007257F7 /* HomePresenter.swift in Sources */,
 				8C4B7C532C33A539007257F7 /* MovieRouter.swift in Sources */,
 				8C4B7C882C3CC192007257F7 /* TalkShowRouter.swift in Sources */,
@@ -556,6 +632,7 @@
 				8BB7F7A2297B55BB0076D6ED /* UIColor+Extension.swift in Sources */,
 				8C4B7C572C33A6F6007257F7 /* MovieViewController.swift in Sources */,
 				8BF445EE293399F7009694CC /* MovieDetailsViewController.swift in Sources */,
+				8C4B7C9E2C4F3C01007257F7 /* TrailerInteractor.swift in Sources */,
 				8C4B7C7F2C3CBBA3007257F7 /* TalkShowProtocols.swift in Sources */,
 				8C4B7C5A2C33AB3F007257F7 /* MovieProtocols.swift in Sources */,
 				8C4B7C512C33A3E8007257F7 /* MoviePresenter.swift in Sources */,
@@ -564,8 +641,11 @@
 				8BB7F7A6297B5BDA0076D6ED /* NSAttributedString+Extension.swift in Sources */,
 				8C4B7C742C359732007257F7 /* HomeRouter.swift in Sources */,
 				8BB7F7A4297B56BB0076D6ED /* UIView+Extension.swift in Sources */,
+				8C4B7CA42C4F3DF0007257F7 /* TrailerRouter.swift in Sources */,
 				8C4B7C672C34E61E007257F7 /* Protocols.swift in Sources */,
+				8C4B7C972C4F3B75007257F7 /* Trailer.swift in Sources */,
 				8C4B7C852C3CC085007257F7 /* TalkShowPresenter.swift in Sources */,
+				8C4B7C9B2C4F3BDE007257F7 /* TrailersProtocols.swift in Sources */,
 				8C4B7C932C3F2C48007257F7 /* TalkShowDetailView.swift in Sources */,
 				8C4B7C492C339C48007257F7 /* MovieEntity.swift in Sources */,
 				8C4B7C5C2C33B27B007257F7 /* MovieViewCell.swift in Sources */,

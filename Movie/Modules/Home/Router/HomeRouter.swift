@@ -11,25 +11,20 @@ class HomeRouter: HomeRouterProtocol {
 
     static func createHomeModule() -> UIViewController {
         let homeViewController = HomeViewController()
+        
+        //let apiClient = APIClient()
         let presenter: HomePresenterProtocol & HomeInteractorOutputProtocol = HomePresenter()
         let interactor: HomeInteractorInputProtocol = HomeInteractor()
         let router: HomeRouterProtocol = HomeRouter()
         
-        //homeViewController.homePresenter = presenter
-        //presenter.homeView = homeViewController
+        homeViewController.homePresenter = presenter
+        presenter.homeView = homeViewController
         presenter.homeInteractor = interactor
         presenter.homeRouter = router
+        //interactor.apiClient = apiClient
         interactor.homePresenterInteractor = presenter
         
         return homeViewController
-    }
-    
-    func navigateToMovies(from view: HomeViewProtocol, with movie: MovieEntity) {
-        let movieDetailsVC = MovieDetailsViewController(movie: movie)
-        if let viewController = view as? UIViewController {
-            viewController.navigationController?.pushViewController(movieDetailsVC, animated: true)
-        }
-        
     }
 
 }
